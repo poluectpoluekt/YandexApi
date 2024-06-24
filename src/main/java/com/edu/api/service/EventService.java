@@ -22,27 +22,17 @@ public class EventService {
 
     private final RestTemplate restTemplate;
 
-    //@Value("${spring.yandexKey}")
+    @Value("${spring.yandexKey}")
     private final String yandexApiKey = "key";
 
     public ResultRoutesDto yandexApi(DataRoutesDto dataRoutes) throws YandexResponseDataException {
 
-//        String url = "https://api.routing.yandex.net/v2/distancematrix?origins=" + dataRoutes.getSource()
-//                + "&destinations=" + dataRoutes.getTarget() +"&departure_time=" + dataRoutes.getTimeTransportation()
-//                + "&traffic=" + dataRoutes.getTraffic() + "&apikey=" + yandexApiKey;
-//
-//        ResponseEntity<ResponseYandexApi> response = restTemplate
-//                .exchange(url, HttpMethod.GET, null, ResponseYandexApi.class);
+        String url = "https://api.routing.yandex.net/v2/distancematrix?origins=" + dataRoutes.getSource()
+                + "&destinations=" + dataRoutes.getTarget() +"&departure_time=" + dataRoutes.getTimeTransportation()
+                + "&traffic=" + dataRoutes.getTraffic() + "&apikey=" + yandexApiKey;
 
-        List<YandexRoutes> routesList = new ArrayList<>();
-        routesList.add(new YandexRoutes("ok",new Distance(15), new Duration(45)));
-        routesList.add(new YandexRoutes("ok",new Distance(15), new Duration(43)));
-        routesList.add(new YandexRoutes("ok",new Distance(17), new Duration(48)));
-        routesList.add(new YandexRoutes("ok",new Distance(14), new Duration(43)));
-
-        ResponseYandexApi responseYandexApi = new ResponseYandexApi(routesList);
-        ResponseEntity<ResponseYandexApi> response = new ResponseEntity<>(responseYandexApi,HttpStatusCode.valueOf(200));
-
+        ResponseEntity<ResponseYandexApi> response = restTemplate
+                .exchange(url, HttpMethod.GET, null, ResponseYandexApi.class);
 
         if (response.getBody() == null) {
             throw new YandexResponseDataException();
