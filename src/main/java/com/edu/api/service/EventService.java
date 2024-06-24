@@ -23,7 +23,7 @@ public class EventService {
     private final RestTemplate restTemplate;
 
     @Value("${spring.yandexKey}")
-    private final String yandexApiKey = "key";
+    private final String yandexApiKey;
 
     public ResultRoutesDto yandexApi(DataRoutesDto dataRoutes) throws YandexResponseDataException {
 
