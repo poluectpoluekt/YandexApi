@@ -3,18 +3,15 @@ package com.edu.api.service;
 import com.edu.api.dto.DataRoutesDto;
 import com.edu.api.dto.ResultRoutesDto;
 import com.edu.api.entity.api.*;
-import com.edu.api.exception.FilterListNotNullException;
 import com.edu.api.exception.YandexResponseDataException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -22,7 +19,7 @@ public class EventService {
 
     private final RestTemplate restTemplate;
 
-    @Value("${spring.yandexKey}")
+    @Value("${my.yandex.key")
     private final String yandexApiKey;
 
     public ResultRoutesDto yandexApi(DataRoutesDto dataRoutes) throws YandexResponseDataException {

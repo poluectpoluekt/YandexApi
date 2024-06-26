@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/SecDB
+    username: postgres
+    password: postgres
+
+my:
+  yandex:
+    key:
