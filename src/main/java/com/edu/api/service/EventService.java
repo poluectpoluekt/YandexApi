@@ -5,6 +5,8 @@ import com.edu.api.dto.ResultRoutesDto;
 import com.edu.api.entity.api.*;
 import com.edu.api.exception.YandexResponseDataException;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,11 @@ public class EventService {
 
     private final RestTemplate restTemplate;
 
-    @Value("${my.yandex.key")
-    private final String yandexApiKey;
+    //@Value("${app.yandex.key}")
+    private final String yandexApiKey = "key";
 
     public ResultRoutesDto yandexApi(DataRoutesDto dataRoutes) throws YandexResponseDataException {
+
 
         String url = "https://api.routing.yandex.net/v2/distancematrix?origins=" + dataRoutes.getSource()
                 + "&destinations=" + dataRoutes.getTarget() +"&departure_time=" + dataRoutes.getTimeTransportation()

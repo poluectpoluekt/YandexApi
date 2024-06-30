@@ -3,7 +3,19 @@ spring:
     url: jdbc:postgresql://localhost:5432/SecDB
     username: postgres
     password: postgres
-
-my:
+logging:
+  level:
+    org:
+      springframework:
+        security: debug
+        web: debug
+app:
   yandex:
-    key:
+    key: 44df59a4-25aa-4c8b-8581-fdecbf3ffec0
+  security:
+    urls: /api/auth/**
+    secret: SecretKeyForMySpringApp
+    prefix: Bearer
+    header: Authorization
+    content_type: application/json
+    expiration_time: 3600000

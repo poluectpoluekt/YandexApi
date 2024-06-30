@@ -1,38 +1,57 @@
 package com.edu.api.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Setter
 @Getter
+@Table(name = "Person")
+@Entity
 public class User implements UserDetails {
 
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column(name = "email")
     private String email;
+    @Column(name = "password")
     private String password;
+    @Column(name = "is_account_non_expired")
     private boolean isAccountNonExpired;
+    @Column(name = "is_account_non_locked")
     private boolean isAccountNonLocked;
+    @Column(name = "is_credentials_non_expired")
     private boolean isCredentialsNonExpired;
+    @Column(name = "is_enabled")
     private boolean isEnabled;
 
-    private Set<ERole> roles = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "User_Role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles;
+
+    @Transient
+    private Collection<? extends GrantedAuthority> authorities;
 
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override
