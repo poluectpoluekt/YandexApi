@@ -8,6 +8,8 @@ import com.edu.api.repository.RoleRepository;
 import com.edu.api.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -45,6 +47,10 @@ public class UserService implements UserDetailsService {
         user.setRoles(Collections.singleton(roleRepository.findByName("ROLE_USER").get()));
 
         return userRepository.save(user);
+    }
+
+    public User findUserByEmail(UserDto userDto){
+        return userRepository.findByEmail(userDto.getEmail()).orElseThrow(()-> new UsernameNotFoundException(userDto.getEmail()));
     }
 
 
