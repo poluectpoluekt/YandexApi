@@ -31,17 +31,12 @@ public class EventController {
 
     @PostMapping("/req")
     public void requestNotRole(){
-        System.out.println("done request not role");
-        System.out.println("---------------------");
-        System.out.println(SecurityContextHolder.getContext().getAuthentication());
+
     }
 
     @PreAuthorize("hasAuthority('USER')")
     @PostMapping("/role")
     public void requestForUserRole(){
-        System.out.println(SecurityContextHolder.getContext().getAuthentication());
-        System.out.println("----------------------------------");
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
-        System.out.println("done request with role user");
+
     }
 }

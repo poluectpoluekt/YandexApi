@@ -15,14 +15,14 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class EventService {
 
     private final RestTemplate restTemplate;
 
-    //@Value("${app.yandex.key}")
-    private final String yandexApiKey = "key";
+    @Value("${app.yandex.key}")
+    private String yandexApiKey;
 
     public ResultRoutesDto yandexApi(DataRoutesDto dataRoutes) throws YandexResponseDataException {
 
