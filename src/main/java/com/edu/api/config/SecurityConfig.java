@@ -1,8 +1,6 @@
 package com.edu.api.config;
 
 
-import com.edu.api.service.UserService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,7 +36,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                    auth -> auth.requestMatchers("/api/auth/**").permitAll()
                            .requestMatchers("/error").permitAll()
-                           .requestMatchers("/api/event/**").authenticated()
                            .anyRequest().authenticated());
                  //.httpBasic(Customizer.withDefaults());
 

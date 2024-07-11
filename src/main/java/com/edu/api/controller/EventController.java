@@ -1,8 +1,10 @@
 package com.edu.api.controller;
 
 import com.edu.api.dto.DataRoutesDto;
+import com.edu.api.dto.KafkaDto;
 import com.edu.api.dto.ResultRoutesDto;
 import com.edu.api.exception.YandexResponseDataException;
+import com.edu.api.service.DataSenderKafka;
 import com.edu.api.service.EventService;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -21,7 +23,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class EventController {
 
     private final EventService eventService;
-    //private final Logger logger = LoggerFactory.getLogger(EventController.class);
+    private final DataSenderKafka senderKafka;
+    private final Logger logger = LoggerFactory.getLogger(EventController.class);
 
     @PostMapping("/way")
     public ResultRoutesDto getWay(@RequestBody DataRoutesDto dataRoutesDto) throws YandexResponseDataException {
@@ -38,5 +41,10 @@ public class EventController {
     @PostMapping("/role")
     public void requestForUserRole(){
 
+    }
+
+    @PostMapping("/kafka/send")
+    public void sendMessageToKafka(@RequestBody KafkaDto kafkaDto){
+        senderKafka.send(kafkaDto);
     }
 }
